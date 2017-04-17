@@ -1,0 +1,7 @@
+This is the project app created in the [ReactTraining.com](https://online.reacttraining.com/courses/) tutorial.
+
+Notes for the sections are stored in these private gists...
+
+- [React Fundamentals - Intro to the React Ecosystem part 1/14](https://gist.github.com/cfsanderson/d9cb230ebcf28088c20d1bc9f9ff1dd5)
+- [React Fundamentals - Setting up First Component part 2/14](https://gist.github.com/cfsanderson/0c8ad094b7bcf8c66a7f1ae3d9956ccf)
+- 
