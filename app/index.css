@@ -1,10 +1,27 @@
 body {
-  background: green;
+  font-family: -apple-system,BlinkMacSystemFont,SegoeUI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;
 }
 
-h1 {
-  font-family: sans-serif;
-  text-align: center;
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.container h1 {
   font-size: 4em;
   color: rgb(231, 231, 231)
+}
+
+.languages {
+  display: flex;
+  justify-content: center;
+}
+
+.languages li {
+  margin: 10px;
 }
