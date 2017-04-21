@@ -12,11 +12,15 @@ ul {
   margin: 0 auto;
 }
 
-.container h1 {
+.container h2 {
   font-size: 4em;
-  color: rgb(231, 231, 231)
+  color: rgb(231, 231, 231);
 }
 
+.container h2 span {
+  font-size: 1em;
+  color: #d0021b;
+}
 .languages {
   display: flex;
   justify-content: center;
@@ -24,4 +28,6 @@ ul {
 
 .languages li {
   margin: 10px;
+  font-weight: bold;
+  cursor: pointer;
 }

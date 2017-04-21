@@ -11,4 +11,5 @@ class App extends React.Component {
   }
 }
 
-module.exports = App
+module.exports = App;
+// common JS way of exporting

@@ -2,16 +2,24 @@ const React = require('react')
 
 class Popular extends React.Component {
   constructor (props) {
+    // when creating a constructor you should always call `super`
     super(props)
     this.state = {
+      // sets the default view of "All"
       selectedLanguage: 'All'
     }
 
-    this.updateLanguage = this.updateLanguage.bind(this)
+    this.updateLanguage = this.updateLanguage.bind(this);
+    // We don't know what "this" is bound to until updateLanguage is invoked.
+    // The bind property takes in a context and returns the "this" keyword bound to the function that it's in.
   }
 
   updateLanguage(lang) {
-    this.setState(() => {selectedLanguage: lang})
+    this.setState(function () {
+      return {
+        selectedLanguage: lang
+      }
+    })
   }
 
   render() {
@@ -19,16 +27,20 @@ class Popular extends React.Component {
 
     return (
       <div>
-        <h1>Popular!</h1>
+        <h2>Selected Language: <span>{this.state.selectedLanguage}</span></h2>
         <ul className='languages'>
           {languages.map(function(lang) {
-            console.log(this)
+            // new function so "this" is in a new context
             return (
-              <li key={lang}>
+              <li
+                style={lang === this.state.selectedLanguage ? { color: '#d0021b' }:  null}
+                onClick={this.updateLanguage.bind(null, lang)}
+                key={lang}>
                 {lang}
               </li>
             )
-          })}
+          }, this)}
+          {/* by passing "this" as the second argument to .map it gives it the original context outside the func */}
         </ul>
       </div>
     )
@@ -36,3 +48,4 @@ class Popular extends React.Component {
 }
 
 module.exports = Popular
+// common JS
