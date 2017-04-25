@@ -1,5 +1,6 @@
 var React = require('react')
 var PropTypes = require('prop-types')
+var api = require('../utils/api')
 
 function SelectLanguage (props) {
   var languages = ['All', 'Javascript', 'Ruby', 'Java', 'CSS', 'Python']
@@ -31,7 +32,8 @@ class Popular extends React.Component {
     super(props)
     this.state = {
     //   // sets the default view of "All"
-      selectedLanguage: 'All'
+      selectedLanguage: 'All',
+      repos: null
     }
 
     this.updateLanguage = this.updateLanguage.bind(this);
@@ -39,13 +41,27 @@ class Popular extends React.Component {
     // The bind property takes in a context and returns the "this" keyword bound to the function that it's in.
   }
 
-  updateLanguage(lang) {
-    this.setState(function () {
-      return {
-        selectedLanguage: lang,
-      }
-    })
-  }
+componentDidMount () {
+  this.updateLanguage(this.state.selectedLanguage);
+}
+
+updateLanguage(lang) {
+  this.setState(function () {
+    return {
+      selectedLanguage: lang,
+      repos: null
+    }
+  })
+
+  api.fetchPopularRepos(lang)
+    .then(function (repos) {
+      this.setState(function () {
+        return {
+          repos: repos
+        }
+      })
+    }.bind(this));
+}
 
   render() {
     return (
@@ -55,6 +71,7 @@ class Popular extends React.Component {
           selectedLanguage={this.state.selectedLanguage}
           onSelect={this.updateLanguage}
         />
+        {JSON.stringify(this.state.repos)}
       </div>
     )
   }
