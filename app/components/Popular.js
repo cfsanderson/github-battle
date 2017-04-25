@@ -1,11 +1,36 @@
-const React = require('react')
+var React = require('react')
+var PropTypes = require('prop-types')
+
+function SelectLanguage (props) {
+  var languages = ['All', 'Javascript', 'Ruby', 'Java', 'CSS', 'Python']
+
+  return (
+    <ul className='languages'>
+      {languages.map(function (lang) {
+        return (
+          <li
+            style={lang === props.selectedLanguage ? { color: '#d0021b' }:  null}
+            onClick={props.onSelect.bind(null, lang)}
+            key={lang}>
+            {lang}
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
+
+SelectLanguage.propTypes = {
+  selectedLanguage: PropTypes.string.isRequired,
+  onSelect: PropTypes.func.isRequired,
+}
 
 class Popular extends React.Component {
-  constructor (props) {
+  constructor(props) {
     // when creating a constructor you should always call `super`
     super(props)
     this.state = {
-      // sets the default view of "All"
+    //   // sets the default view of "All"
       selectedLanguage: 'All'
     }
 
@@ -17,31 +42,19 @@ class Popular extends React.Component {
   updateLanguage(lang) {
     this.setState(function () {
       return {
-        selectedLanguage: lang
+        selectedLanguage: lang,
       }
     })
   }
 
   render() {
-    const languages = ['All', 'Javascript', 'Ruby', 'Java', 'CSS', 'Python']
-
     return (
       <div>
-        <h2>Selected Language: <span>{this.state.selectedLanguage}</span></h2>
-        <ul className='languages'>
-          {languages.map(function(lang) {
-            // new function so "this" is in a new context
-            return (
-              <li
-                style={lang === this.state.selectedLanguage ? { color: '#d0021b' }:  null}
-                onClick={this.updateLanguage.bind(null, lang)}
-                key={lang}>
-                {lang}
-              </li>
-            )
-          }, this)}
-          {/* by passing "this" as the second argument to .map it gives it the original context outside the func */}
-        </ul>
+        <h2>Selected Language:<br/><span>{this.state.selectedLanguage}</span></h2>
+        <SelectLanguage
+          selectedLanguage={this.state.selectedLanguage}
+          onSelect={this.updateLanguage}
+        />
       </div>
     )
   }
